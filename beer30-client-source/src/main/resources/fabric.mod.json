@@ -1,0 +1,12 @@
+{
+	"schemaVersion": 1,
+	"id": "beer30client",
+	"version": "${version}",
+	"name": "Beer30 Client",
+	"description": "Busch Light themed client HUD mods with an RSHIFT menu and Spotify controls.",
+	"authors": ["Beer30"],
+	"license": "MIT",
+	"environment": "client",
+	"entrypoints": { "client": ["com.beer30.client.Beer30Client"] },
+	"depends": { "fabricloader": ">=0.16.0", "minecraft": "~1.21.4", "java": ">=21", "fabric-api": "*" }
+}
