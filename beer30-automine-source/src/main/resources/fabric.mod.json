@@ -1,0 +1,12 @@
+{
+	"schemaVersion": 1,
+	"id": "beer30automine",
+	"version": "${version}",
+	"name": "Beer30 Auto Miner",
+	"description": "Flies loops inside a bedrock-walled area and mines what your crosshair is on. Beer30 themed menu.",
+	"authors": ["Beer30"],
+	"license": "MIT",
+	"environment": "client",
+	"entrypoints": { "client": ["com.beer30.automine.AutoMineMod"] },
+	"depends": { "fabricloader": ">=0.16.0", "minecraft": "~1.21.4", "java": ">=21", "fabric-api": "*" }
+}
