@@ -15,7 +15,7 @@ jobs:
           if [ -z "$B" ]; then echo "ERROR: no beer30-client project found. Upload beer30-client-source.zip"; exit 1; fi
           echo "PROJ=$(dirname "$B")" >> "$GITHUB_ENV"
       - uses: actions/setup-java@v4
-        with: { distribution: temurin, java-version: 21 }
+        with: { distribution: temurin, java-version: 25 }
       - uses: gradle/actions/setup-gradle@v4
         with: { gradle-version: "9.7.1" }
       - name: Build
