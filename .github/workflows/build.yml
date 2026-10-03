@@ -6,18 +6,21 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - name: Show repo files
-        run: find . -not -path './.git/*' -maxdepth 4 | sort | head -80
+        run: find . -not -path './.git/*' -maxdepth 3 | sort | head -80
+      - name: Unpack project
+        run: |
+          Z=$(find . -name 'beer30-client-source.zip' -not -path './.git/*' | head -1)
+          if [ -n "$Z" ]; then mkdir -p /tmp/proj && unzip -q "$Z" -d /tmp/proj; else mkdir -p /tmp/proj && cp -r . /tmp/proj; fi
+          B=$(find /tmp/proj -name build.gradle | head -1)
+          if [ -z "$B" ]; then echo "ERROR: no beer30-client project found. Upload beer30-client-source.zip"; exit 1; fi
+          echo "PROJ=$(dirname "$B")" >> "$GITHUB_ENV"
       - uses: actions/setup-java@v4
         with: { distribution: temurin, java-version: 21 }
       - uses: gradle/actions/setup-gradle@v4
         with: { gradle-version: "9.7.1" }
       - name: Build
-        run: |
-          B=$(find . -name build.gradle -not -path './.git/*' | head -1)
-          if [ -z "$B" ]; then echo "ERROR: build.gradle was not uploaded"; exit 1; fi
-          cd "$(dirname "$B")"
-          gradle build --no-daemon
+        run: cd "$PROJ" && gradle build --no-daemon
       - uses: actions/upload-artifact@v4
         with:
           name: beer30-client
-          path: "**/build/libs/beer30-client-*.jar"
+          path: /tmp/proj/**/build/libs/beer30-client-*.jar
