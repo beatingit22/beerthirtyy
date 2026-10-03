@@ -23,4 +23,4 @@ jobs:
       - uses: actions/upload-artifact@v4
         with:
           name: beer30-client
-          path: /tmp/proj/**/build/libs/beer30-client-*.jar
+          path: path: /tmp/proj/**/build/libs/*.jar
